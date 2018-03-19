@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  #username: appuser
+  #password: apppass
+  #host: sql_srv
+  username: root
+  password:
+  host: localhost
+
+development:
+  <<: *default
+  database: bank_development
+
+test: &test
+  <<: *default
+  database: bank_test
+
+cucumber:
+  <<: *test

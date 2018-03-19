@@ -1,0 +1,21 @@
+FROM ruby:2.4.3-alpine3.7
+#FROM ruby:2.4.3
+
+#ENV http_proxy proxy1.audatex.es
+#ENV https_proxy proxy1.audatex.es
+
+RUN apk update && apk add nodejs build-base libxml2-dev sqlite-dev libxslt-dev postgresql postgresql-dev
+#RUN apt-get update \
+#    && apt-get install -y --no-install-recommends \
+#        postgresql-client \
+#    && rm -rf /var/lib/apt/lists/*
+
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY Gemfile ./Gemfile
+COPY Gemfile.lock ./Gemfile.lock
+
+RUN bundle install -j 20
+COPY . .
