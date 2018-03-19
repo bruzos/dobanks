@@ -1,0 +1,23 @@
+version: '2'
+services:
+  web:
+    build: .
+    command: bundle exec rails s -b 0.0.0.0
+    #command: bundle exec rspec spec
+    volumes:
+      - C:\Users\esdbsr\Documents\DigitalOrigin\dobanks:/usr/src/app
+    ports:
+      - "3000:3000"
+    links:
+      - db:sql_srv
+    #environment:
+    #  DATABASE_URL: postgres://bank_user@postgres/bankapp
+  db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+       MYSQL_ROOT_PASSWORD: zzz
+       MYSQL_USER: appuser
+       MYSQL_PASSWORD: apppass
+       MYSQL_DATABASE: bank_development
